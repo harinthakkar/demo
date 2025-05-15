@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const studentRoutes = require('./routes/studentRoutes');
-
+const quizRoutes = require('./routes/quizRoutes');
+const resultRoutes = require('./routes/resultRoutes');
 
 const app = express();
 
 
-app.use(cors()); // Enable CORS for all routes
-app.use(bodyParser.json()); // To parse JSON data
+app.use(cors()); 
+app.use(bodyParser.json()); 
 
 
 mongoose.connect('mongodb://localhost:27017/studentDB', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -18,6 +19,8 @@ mongoose.connect('mongodb://localhost:27017/studentDB', { useNewUrlParser: true,
 
 
 app.use('/api/students', studentRoutes);
+app.use('/api/quizzes', quizRoutes);
+app.use('/api/results', resultRoutes);
 
 
 const PORT = process.env.PORT || 5000;
